@@ -1,5 +1,7 @@
-CS 350 Study Notes
-Topic 2: Threads
+# CS 350 Study Notes
+
+## Topic 2: Threads
+
 Q: What are the three views of an operating system? Describe them.
 A:
 Application: what can it do (that I care about)?
@@ -30,7 +32,9 @@ A: Timer interrupts after a thread runs for some period of time (aka. quantum). 
 
 Q: Describe what happens when an interrupt occurs. Where do interrupts come from?
 A: From devices/hardware. See below for details.
-Topic 3: Sync
+
+## Topic 3: Sync
+
 Q: What are the three properties of a good implementation of synchronization?
 A: fair, efficient, correct
 
@@ -66,7 +70,9 @@ A:
 No hold and and wait - acquire all at once
 Preemption - take resources away from a thread (not realistic)
 Resource ordering - order the resources in a way that makes acquisition acyclic (can only request larger resources, e.g. larger account #s)
-Topic 4: Processes
+
+## Topic 4: Processes
+
 Q: What information is contained within a process?
 A: address space, threads, pid, current working directory, other resources
 
@@ -111,7 +117,9 @@ A: PID, owner, address space, threads, files/other resources, cwd, runtime and m
 
 Q: Define timesharing. When can the CPU context switch to another thread?
 A: Share a CPU between multiple processes. During syscall/interrupt/exceptions.
-Topic 5a: VM pre-midterm
+
+## Topic 5a: VM pre-midterm
+
 Q: A system uses physical address and virtual addresses. How many physical address spaces are there in a computer? How many virtual address spaces?
 A: | Physical | = | RAM | = | Virtual |
 There’s only one physical address space per machine, and one virtual address space per process.
@@ -173,7 +181,9 @@ A: Those things (rodata, text) are sections.
 1st LOAD segment contains .text, .rodata (things you cannot change)
 2nd LOAD segment contains data, bss, sbss (things you can change)
 segments contain sections.
-Topic 5b: VM post-midterm
+
+## Topic 5b: VM post-midterm
+
 Q: Page tables for large address spaces may be very large. One problem is that they must be in memory, and must be physically contiguous. What are two solutions to this problem?
 A: multi-level paging, or segmentation + paging
 
@@ -229,7 +239,9 @@ A: Less page faults, more CPU-cycles spent doing useful work vs mundane memory m
 
 Q: Describe an ideal amount of a process’ working set to remain in memory in terms of suspending processes.
 A: 100% of {working} set, 0% of {resident} \ {working} set (aka we keep something iff it is useful)
-Topic 6: Processor Scheduling
+
+## Topic 6: Processor Scheduling
+
 Q: What are the 4 scheduling algorithms discussed in lecture? Describe/compare/contrast them.
 A:
 FCFS: simple, avoid starvation, inefficient. Has preemptive variant called round-robin.
@@ -251,7 +263,9 @@ Q: Compare and contrast the pros/cons of using one queue per core vs. one queue 
 A:
 Pro of 1 queue per core: less contention, more scalability
 Pro of 1 queue for all: easy to load balance (this tradeoff came up during co-op ironically, for a logging request handling app)
-Topic 7: I/O
+
+## Topic 7: I/O
+
 Q: What are the 3 registers each device maintains? How are they used?
 A:
 Command: processor communicates to the device
@@ -297,7 +311,9 @@ A: OS or controller or both.
 FCFS: fair, simple, inefficient.
 SSTF (shortest seek time first): unfair (starve long requests), simple, efficient.
 SCAN: fair, not as simple, efficient.
-Topic 8: FS
+
+## Topic 8: FS
+
 Q: What is the definition of a file given in the notes? What is the definition of a filesystem?
 A:
 File: persistent, named data objects.
@@ -369,7 +385,9 @@ A: checkpoint-region → most recent imap → most recent inode
 
 Q: Why do we store imap copies after inode copies? Why use checkpoint regions?
 A: You gotta keep something at a known location (CR). small imap copies are for efficiency.
-Topic 9: IPC
+
+## Topic 9: IPC
+
 Q: What are the two general methods that can be used for two processes to share information?
 A: Shared storage (i.e. files) and message-based (i.e. sockets)
 
@@ -404,8 +422,10 @@ A: Until the other socket accepts the connection request.
 Q: With stream sockets, if the active process does not choose to bind an address to the socket, what will happen? What is the advantage of this?
 A: OS will automatically assign one. It's good because the process does not need to hard-code an address before forming a connection
 
------------------
-BONUS questions by me:
+---
+
+## BONUS questions by me
+
 Q: How would you implement a sync’ed linked list shared between threads without using locks/semaphores (i.e. using CAS)? These are called wait-free data structures, and they do exist.
 
 Q: What happens if you get interrupted during an interrupt? (e.g. at trapframe copying) Can you be interrupted?
